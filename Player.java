@@ -15,6 +15,7 @@ public class Player{
 		this.y = y;
 
 		SpriteSheet ss = new SpriteSheet(game.getSpriteSheet());
+
 		player = ss.grabImage(1, 1, 32, 32);
 	}
 
@@ -24,5 +25,21 @@ public class Player{
 
 	public void render(Graphics g){
 		g.drawImage(player, (int)x, (int)y, null);
+	}
+
+	public double getX(){
+		return x;
+	}
+
+	public double getY(){
+		return y;
+	}
+
+	public void setX(double x){
+		this.x = x;
+	}
+
+	public void setY(double y){
+		this.y = y;
 	}
 }

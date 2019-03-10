@@ -2,11 +2,15 @@ import java.awt.Canvas;
 import java.awt.Dimension;
 import javax.swing.JFrame;
 import java.awt.Image;
+import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
 import java.awt.image.BufferStrategy;
 import java.awt.Graphics;
 import javax.imageio.ImageIO;
 import java.io.IOException;
+import java.awt.event.KeyListener;
+import java.awt.event.KeyAdapter;
+
 public class Game extends Canvas implements Runnable {
 	
 	public static final int WIDTH = 320;
@@ -33,6 +37,9 @@ public class Game extends Canvas implements Runnable {
 			e.printStackTrace();
 		}
 
+		addKeyListener(new KeyInput(this));
+		this.requestFocus();
+		
 		p = new Player(200, 200, this);
 	}
 	
@@ -122,6 +129,31 @@ public class Game extends Canvas implements Runnable {
 		g.dispose();
 		bs.show();
 	}
+	
+	public void keyPressed(KeyEvent e){
+		int key = e.getKeyCode();
+
+		if(key == KeyEvent.VK_RIGHT){
+			p.setX(p.getX() + 5);
+			System.out.println("RIGHT");
+
+		}else if (key == KeyEvent.VK_LEFT){
+			p.setX(p.getX() - 5);
+			System.out.println("LEFT");
+
+		}else if (key == KeyEvent.VK_DOWN){
+			p.setY(p.getY() + 5);
+			System.out.println("DOWN");
+
+		}else if (key == KeyEvent.VK_UP){
+			p.setY(p.getY() - 5);
+			System.out.println("UP");
+		}
+	}
+
+	public void keyReleased(KeyEvent e){
+		
+		}
 	
 	public static void main (String args[]) {
 		Game game = new Game();
