@@ -7,7 +7,6 @@ import java.awt.image.BufferStrategy;
 import java.awt.Graphics;
 import javax.imageio.ImageIO;
 import java.io.IOException;
-
 public class Game extends Canvas implements Runnable {
 	
 	public static final int WIDTH = 320;
@@ -21,8 +20,7 @@ public class Game extends Canvas implements Runnable {
 	private BufferedImage image = new BufferedImage(WIDTH,HEIGHT,BufferedImage.TYPE_INT_RGB);
 	private BufferedImage spriteSheet = null;
 
-	//temp lang
-	private BufferedImage player;
+	private Player p;
 
 	public void init(){
 		BufferedImageLoader loader = new BufferedImageLoader();
@@ -35,12 +33,9 @@ public class Game extends Canvas implements Runnable {
 			e.printStackTrace();
 		}
 
-		SpriteSheet ss = new SpriteSheet(spriteSheet);
-		player = ss.grabImage(1, 1,32,32);
-
+		p = new Player(200, 200, this);
 	}
 	
-
 	private synchronized void start() {
 		if(running)
 			return;
@@ -103,7 +98,7 @@ public class Game extends Canvas implements Runnable {
 
 //game that update//
 	private void tick(){
-
+		p.tick();
 	}
 
 //game that render//
@@ -120,7 +115,7 @@ public class Game extends Canvas implements Runnable {
 
 		g.drawImage(image, 0 , 0, getWidth(), getHeight(), this);
 
-		g.drawImage(player, 100 , 100, this);
+		p.render(g);
 
 
 		/////////////////////////////////////
@@ -144,6 +139,10 @@ public class Game extends Canvas implements Runnable {
 		frame.setVisible(true);
 		
 		game.start();
+	}
+
+	public BufferedImage getSpriteSheet(){
+		return spriteSheet;
 	}
 	
 }
