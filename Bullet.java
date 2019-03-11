@@ -26,7 +26,7 @@ public class Bullet{
 		g.drawImage(image, (int)x, (int)y, null);
 	}
 
-	public double get Y(){
+	public double getY(){
 		return y;
 	}
 
