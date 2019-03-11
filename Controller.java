@@ -17,8 +17,10 @@ public class Controller{
 		for(int i = 0; i < b.size(); i++){
 			TempBullet = b.get(i);
 
-			TempBullet.tick();
+			if(TempBullet.getY() < 0)
+				removeBullet(TempBullet);
 
+			TempBullet.tick();
 		}
 
 	}
