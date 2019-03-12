@@ -1,7 +1,7 @@
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 
-public class Bullet{
+public class Bullet implements Entity {
 
 	private double x;
 	private double y;
@@ -21,6 +21,10 @@ public class Bullet{
 
 	public void render(Graphics g){
 		g.drawImage(tex.fire, (int)x, (int)y, null);
+	}
+
+	public double getx(){
+		return x;
 	}
 
 	public double getY(){

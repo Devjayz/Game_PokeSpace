@@ -1,7 +1,7 @@
 import java.awt.Graphics;
 import java.util.Random;
 
-public class Enemy{
+public class Enemy implements Entity{
 
 	private double x, y;
 	Random r = new Random();
@@ -26,6 +26,10 @@ public class Enemy{
 	public void render(Graphics g){
 		g.drawImage(tex.enemy, (int)x, (int)y, null);
 
+	}
+
+	public double getX(){
+		return x;
 	}
 
 	public double getY(){

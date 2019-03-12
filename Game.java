@@ -153,7 +153,7 @@ public class Game extends Canvas implements Runnable {
 			p.setVelY(-5);
 		}else if (key== KeyEvent.VK_SPACE && !is_shooting){
 			is_shooting = true;
-			c.addBullet(new Bullet(p.getX(), p.getY(), tex));
+			c.addEntity(new Bullet(p.getX(), p.getY(), tex));
 		}
 	}
 
