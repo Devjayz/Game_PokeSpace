@@ -30,7 +30,7 @@ public class Game extends Canvas implements Runnable {
 	private Textures tex; 
 
 	public void init(){
-		BufferedImageLoader loader = new BufferedImageLoader();
+			BufferedImageLoader loader = new BufferedImageLoader();
 		
 		try{
 			
@@ -47,7 +47,7 @@ public class Game extends Canvas implements Runnable {
 		tex = new Textures(this);
 		
 		p = new Player(200, 200, tex);
-		c = new Controller(this, tex);
+		c = new Controller(tex);
 
 	}
 	

@@ -5,7 +5,6 @@ public class Bullet implements Entity {
 
 	private double x;
 	private double y;
-
 	private Textures tex;
 
 	public Bullet(double x, double y, Textures tex){
@@ -23,12 +22,12 @@ public class Bullet implements Entity {
 		g.drawImage(tex.fire, (int)x, (int)y, null);
 	}
 
-	public double getx(){
-		return x;
-	}
-
 	public double getY(){
 		return y;
+	}
+
+	public double getX() {
+		return x;
 	}
 
 }

@@ -7,6 +7,12 @@ public class Controller{
 	private LinkedList<Entity> e = new LinkedList<Entity>();
 	
 	Entity ent;
+	private Textures tex;
+	
+	public 	Controller(Textures tex) {
+		this.tex = tex;
+		addEntity(new Enemy(100, 100, tex));
+	}
 
 	public void tick(){
 		for(int i = 0; i < e.size(); i++){
