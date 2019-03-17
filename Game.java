@@ -24,13 +24,16 @@ public class Game extends Canvas implements Runnable {
 	private BufferedImage background = null;
 
 	private boolean is_shooting = false;
+	
+	private int enemy_count = 5; //how many enemy to spawn//
+	private int enemy_killed = 0; 
 
 	private Player p;
 	private Controller c;
 	private Textures tex; 
 
 	public void init(){
-			BufferedImageLoader loader = new BufferedImageLoader();
+		BufferedImageLoader loader = new BufferedImageLoader();
 		
 		try{
 			
@@ -48,6 +51,8 @@ public class Game extends Canvas implements Runnable {
 		
 		p = new Player(200, 200, tex);
 		c = new Controller(tex);
+		
+		c.createEnemy(enemy_count);
 
 	}
 	
@@ -194,5 +199,22 @@ public class Game extends Canvas implements Runnable {
 	public BufferedImage getSpriteSheet(){
 		return spriteSheet;
 	}
+
+	public int getEnemy_count() {
+		return enemy_count;
+	}
+
+	public void setEnemy_count(int enemy_count) {
+		this.enemy_count = enemy_count;
+	}
+
+	public int getEnemy_killed() {
+		return enemy_killed;
+	}
+
+	public void setEnemy_killed(int enemy_killed) {
+		this.enemy_killed = enemy_killed;
+	}
+	
 	
 }

@@ -8,12 +8,19 @@ public class Controller{
 	
 	Entity ent;
 	private Textures tex;
+	Random r = new Random();
 	
 	public 	Controller(Textures tex) {
 		this.tex = tex;
 		addEntity(new Enemy(100, 100, tex));
 	}
 
+	public void createEnemy(int enemy_count){
+		for(int i = 0; i < enemy_count; i++){
+			addEntity(new Enemy(r.nextInt(640), -10, tex));
+		}
+	}
+	
 	public void tick(){
 		for(int i = 0; i < e.size(); i++){
 			ent = e.get(i);

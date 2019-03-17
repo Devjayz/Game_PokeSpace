@@ -5,6 +5,8 @@ public class Enemy implements Entity{
 
 	private double x, y;
 	Random r = new Random();
+	
+	private int speed = r.nextInt(3) + 1;
 
 	private Textures tex;
 
@@ -15,10 +17,11 @@ public class Enemy implements Entity{
 	}
 
 	public void tick(){
-		y += 1;
+		y += speed;
 
 		if(y > (Game.HEIGHT * Game.SCALE)){
-			y = 0;
+			speed = r.nextInt(3) + 1; // change speed // 
+			y = -10;
 			x = r.nextInt(Game.WIDTH * Game.SCALE);
 		}
 	}
