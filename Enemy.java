@@ -5,6 +5,9 @@ import java.util.Random;
 public class Enemy extends GameObject implements EntityB{
 
 	Random r = new Random();
+	private Game game;
+	private Controller c;
+	
 	
 	private int speed = r.nextInt(3) + 1;
 	
@@ -12,9 +15,11 @@ public class Enemy extends GameObject implements EntityB{
 
 	private Textures tex;
 
-	public Enemy(double x, double y,Textures tex){
+	public Enemy(double x, double y,Textures tex, Controller c, Game game){
 		super(x, y);
 		this.tex = tex;
+		this.c = c;
+		this.game = game;
 		
 		anim = new Animation(5, tex.enemy[0], tex.enemy[1], tex.enemy[2]);
 	}
@@ -26,6 +31,11 @@ public class Enemy extends GameObject implements EntityB{
 			speed = r.nextInt(3) + 1; // change speed // 
 			y = -10;
 			x = r.nextInt(Game.WIDTH * Game.SCALE);
+		}
+		
+		if(Physics.Collision(this, game.ea)) {
+			c.removeEntity(this);
+			game.setEnemy_killed(game.getEnemy_killed() + 1); //kill kill spawn
 		}
 		
 		anim.runAnimation();
