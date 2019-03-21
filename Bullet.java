@@ -6,19 +6,24 @@ public class Bullet extends GameObject implements EntityA {
 
 	private Textures tex;
 	private Game game;
+	
+	Animation anim;
+	
 
 	public Bullet(double x, double y, Textures tex, Game game){
 		super(x, y);
 		this.tex = tex;
 		this.game = game;
+		
+		anim = new Animation(5, tex.fire[0], tex.fire[1], tex.fire[2]);
+		
 	}
 
 	public void tick(){
 		y -= 10;
 		
-		if(Physics.Collision(this, game.eb)){
-		System.out.println("COLLISION DETECTED");	
-		}
+		
+		anim.runAnimation();
 		
 	}
 	
@@ -27,7 +32,7 @@ public class Bullet extends GameObject implements EntityA {
 	} 
 
 	public void render(Graphics g){
-		g.drawImage(tex.fire, (int)x, (int)y, null);
+		anim.drawAnimation(g, x, y, 0);
 	}
 
 	public double getY(){
