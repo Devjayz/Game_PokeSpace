@@ -9,11 +9,15 @@ public class Player extends GameObject implements EntityA{
 	private double velY = 0;
 	private Textures tex; 
 	
+	Game game;
+	Controller controller;
 	Animation anim;
 
-	public Player(double x, double y, Textures tex){
+	public Player(double x, double y, Textures tex, Game game, Controller controller){
 		super(x, y);
 		this.tex = tex;
+		this.game = game;
+		this.controller = controller;
 		
 		anim = new Animation(5, tex.player[0], tex.player[1], tex.player[2]);
 	}
@@ -31,6 +35,18 @@ public class Player extends GameObject implements EntityA{
 		if(y >= 480 - 32)
 			y = 480 - 32;
 		
+		for(int i = 0; i < game.eb.size(); i++) 
+		{
+			EntityB temptEnt = game.eb.get(i);
+			
+			if(Physics.Collision(this, temptEnt))
+			{
+				controller.removeEntity(temptEnt);
+				Game.HEALTH -= 10;
+				game.setEnemy_killed(game.getEnemy_killed() + 1); //kill kill spawn
+
+		}
+	}
 		anim.runAnimation();
 		
 		}

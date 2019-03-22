@@ -33,10 +33,15 @@ public class Enemy extends GameObject implements EntityB{
 			x = r.nextInt(Game.WIDTH * Game.SCALE);
 		}
 		
-		if(Physics.Collision(this, game.ea)) {
+		for(int i = 0; i < game.ea.size(); i++) {
+			EntityA temptEnt = game.ea.get(i);
+		
+		if(Physics.Collision(this, temptEnt)) {
+			c.removeEntity(temptEnt);
 			c.removeEntity(this);
 			game.setEnemy_killed(game.getEnemy_killed() + 1); //kill kill spawn
 		}
+	}
 		
 		anim.runAnimation();
 	}
