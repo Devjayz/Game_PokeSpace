@@ -37,14 +37,12 @@ public class Game extends Canvas implements Runnable {
 	public LinkedList<EntityA> ea;
 	public LinkedList<EntityB> eb;
 	
-	private enum STATE{
+	public static enum STATE{
 		MENU,
 		GAME
 	};
-	private STATE State = STATE.MENU;
+	public static STATE State = STATE.MENU;
 	
-	
-
 	public void init(){
 		BufferedImageLoader loader = new BufferedImageLoader();
 		
@@ -61,13 +59,15 @@ public class Game extends Canvas implements Runnable {
 		addKeyListener(new KeyInput(this));
 
 		tex = new Textures(this);
-		
 		p = new Player(200, 200, tex);
 		c = new Controller(tex, this);
 		menu = new Menu();
 		
 		ea = c.getEntityA();
 		eb = c.getEntityB();
+		
+		this.addMouseListener(new MouseInput());
+
 		
 		c.createEnemy(enemy_count);
 
