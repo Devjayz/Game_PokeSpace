@@ -32,9 +32,17 @@ public class Game extends Canvas implements Runnable {
 	private Player p;
 	private Controller c;
 	private Textures tex; 
+	private Menu menu;
 	
 	public LinkedList<EntityA> ea;
 	public LinkedList<EntityB> eb;
+	
+	private enum STATE{
+		MENU,
+		GAME
+	};
+	private STATE State = STATE.MENU;
+	
 	
 
 	public void init(){
@@ -56,6 +64,7 @@ public class Game extends Canvas implements Runnable {
 		
 		p = new Player(200, 200, tex);
 		c = new Controller(tex, this);
+		menu = new Menu();
 		
 		ea = c.getEntityA();
 		eb = c.getEntityB();
@@ -126,9 +135,10 @@ public class Game extends Canvas implements Runnable {
 
 //game that update//
 	private void tick(){
-		p.tick();
-		c.tick();
-		
+		if(State == STATE.GAME) {
+			p.tick();
+			c.tick();
+		}
 		if(enemy_killed >= enemy_count) {
 			enemy_count += 2;
 			enemy_killed = 0;
@@ -152,8 +162,12 @@ public class Game extends Canvas implements Runnable {
 
 		g.drawImage(background, 0, 0, null);
 
-		p.render(g);
-		c.render(g);
+		if(State == STATE.GAME) {
+			p.render(g);
+			c.render(g);
+		}else if(State == STATE.MENU) { //design of the menu//
+			menu.render(g);
+		}
 		/////////////////////////////////////
 		g.dispose();
 		bs.show();
@@ -162,6 +176,7 @@ public class Game extends Canvas implements Runnable {
 	public void keyPressed(KeyEvent e){
 		int key = e.getKeyCode();
 
+		if(State == STATE.GAME) {
 		if (key == KeyEvent.VK_RIGHT){
 			p.setVelX(5);
 		}else if (key == KeyEvent.VK_LEFT){
@@ -175,6 +190,7 @@ public class Game extends Canvas implements Runnable {
 			c.addEntity(new Bullet(p.getX(), p.getY(), tex, this));
 		}
 	}
+}
 
 	public void keyReleased(KeyEvent e){
 		int key = e.getKeyCode();
